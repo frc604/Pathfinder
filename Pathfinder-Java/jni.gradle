@@ -37,9 +37,9 @@ model {
         pathfinderjava(NativeLibrarySpec) {
             targetPlatform 'roborio'
             targetPlatform 'any64'
-            
+
             project.ext.binaries = []
-            
+
             binaries.withType(SharedLibraryBinarySpec) { binary ->
                 if (binary.targetPlatform.operatingSystem.isCurrent()) {
                     if (project.hasProperty("32") && !binary.targetPlatform.architecture.name.contains("64"))
@@ -48,12 +48,12 @@ model {
                         project.ext.binaries << binary.sharedLibraryFile
                 }
             }
-            
+
             binaries.all {
                 tasks.withType(CCompile) {
                     dependsOn jniHeaders
                     def javahome = org.gradle.internal.jvm.Jvm.current().javaHome
-                    
+
                     if (toolChain in VisualCpp) {
                         cCompiler.args "-I${javahome}/include"
                         if (targetPlatform.operatingSystem.windows)
@@ -71,7 +71,7 @@ model {
                         else if (targetPlatform.operatingSystem.linux)
                             cCompiler.args '-I', "${javahome}/include/linux"
                     }
-                    
+
                     // cCompiler.args << '-L"' + javahome + '/lib"'
                     if (targetPlatform.architecture.name.contains('arm')) {
                         cCompiler.args '-I', new File(armJNI).absolutePath
@@ -79,12 +79,12 @@ model {
                     }
                 }
             }
-            
+
             sources {
                 c {
                     source {
                         srcDirs = ["$nativeDir/c"]
-                        includes  = ['**/*.c']
+                        includes = ['**/*.c']
                     }
                     exportedHeaders {
                         srcDirs = ["$nativeDir/include"]
@@ -102,11 +102,11 @@ model {
 task jniHeaders {
     description = "Generate JNI Headers from the PathfinderJNI"
     group = "Pathfinder"
-    
+
     def outputFolder = file("$nativeDir/jni_headers")
     inputs.files sourceSets.main.output
     outputs.dir outputFolder
-    
+
     doLast {
         outputFolder.mkdirs()
         exec {
@@ -121,7 +121,7 @@ task jniHeaders {
 task libraryExport {
     description = "Export Native Libraries to the resources/ directory of the Jar"
     group = "Pathfinder"
-    
+
     doLast {
         copy {
             from sharedArtifactDir
