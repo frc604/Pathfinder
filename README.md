@@ -23,52 +23,41 @@ Swerve Drive:
 ![](img/swerve.png)
 
 ## Part of the FIRST Robotics Competition?
-We've got some Wiki Entries for you. After you've read this README, go to the [wiki](https://github.com/JacisNonsense/Pathfinder/wiki/) 
-to learn more about how to integrate Pathfinder into your FRC application!
+Add the following lines to your build.gradle if you're using GradleRIO (2018.01.11 or higher):
 
-## Building
-To build the project, run the following command:
+### Java:
+```gradle
+dependencies {
+    compile pathfinder()
+}
 ```
+
+### C++:
+```gradle
+model {
+    frcUserProgram(NativeExecutableSpec) {
+        lib library: "pathfinder"
+    }
+}
+```
+
+**If you're not using GradleRIO, do the following:**  
+### Java
+If you're not using GradleRIO, you must download this manually and copy into `~/wpilib/user/java/lib`: http://dev.imjac.in/maven/jaci/pathfinder/Pathfinder-Java/1.8/Pathfinder-Java-1.8.jar  
+You also have to download this, extract it, and place `libpathfinder.so` into `~/wpilib/user/java/lib`: http://dev.imjac.in/maven/jaci/pathfinder/Pathfinder-JNI/1.8/Pathfinder-JNI-1.8-athena.zip
+
+### C++
+Download this and put `libpathfinder.a` in `~/wpilib/user/cpp/lib`: http://dev.imjac.in/maven/jaci/pathfinder/Pathfinder-Core/1.8/Pathfinder-Core-1.8-athena.zip   
+Download this and extract all of its contents to `~/wpilib/user/cpp/include`: http://dev.imjac.in/maven/jaci/pathfinder/Pathfinder-Core/1.8/Pathfinder-Core-1.8-headers.zip   
+
+## Building / Installing on your Architecture
+If you want to use Pathfinder on your system, you will have to build the library for your platform. You can do this with the following:
+
+```java
 ./gradlew build
-./gradlew assemble
 ```
 
-To build the C code only:
-```
-./gradlew :Pathfinder-Core:build
-```
-
-To build the Java code:
-```
-./gradlew :Pathfinder-Java:build
-./gradlew :Pathfinder-Java:assemble
-```
-
-This will build for both the x64 and x86 architecture for your platform. To cross compile for ARM, do the following:
-```
-./gradlew build -Parm -PcompilerPrefix=arm-linux-gnueabi-
-./gradlew assemble
-```
-
-## Installing on your Architecture
-If your OS or Architecture doesn't fall under the prebuilt binaries that are available with the library, you can 
-install pathfinder's native binaries onto your local system manually. This will allow you to include the library
-in any project you want
-
-64-Bit
-```java
-./gradlew install
-```
-
-32-Bit
-```java
-./gradlew install -P32
-```
-
-If you want to change the prefix location (by default it is `/usr/local`), you can pass the `prefix` property:
-```java
-./gradlew install -Pprefix=<your prefix location>
-```
+The native libraries will be located under `./Pathfinder-Core/build/libs/pathfinder/` (shared and static libs, platform=any64) and `./Pathfinder-Java/build/libs/pathfinderjava/shared/any64`. If you're using native shared (or java), you must put these somewhere on your system load path (e.g. Mac/Linux = `/usr/local`, Windows = Somwhere on PATH)
 
 ## Usage
 To see the usage for each language variation of the API, see the README in their folder.
@@ -78,3 +67,13 @@ To see the usage for each language variation of the API, see the README in their
 | C        | [Pathfinder-Core](Pathfinder-Core/) |
 | Java     | [Pathfinder-Java](Pathfinder-Java/) |
 | LabVIEW  | [Pathfinder-LabVIEW](Pathfinder-LabVIEW/) |
+
+### Other languages
+
+The RobotPy project has created python bindings around the Pathfinder libraries, and can be found at https://github.com/robotpy/robotpy-pathfinder
+
+## A word on releases
+The releases on Maven (mentioned above) are built for the NI RoboRIO (v16/7 2018 image). If you go to the github releases, you can download the 1.5 version for Windows/Linux/Mac releases.
+
+## Further reading
+If you want to know more about how Pathfinder works, I highly suggest watching the seminar on [Motion Profiling by FRC Team 254](https://www.youtube.com/watch?v=8319J1BEHwM), which inspired and provided a lot of guidance for this project. Both use the same generation procedure, with some logistical differences.
