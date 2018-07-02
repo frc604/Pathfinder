@@ -1,0 +1,10 @@
+dist: trust
+sudo: required
+language: java
+before_install:
+ - sudo apt-add-repository ppa:wpilib/toolchain
+ - sudo apt-get update -q
+ - sudo apt-get install frc-toolchain -y
+script:
+ - ./gradlew build
+ - ls
