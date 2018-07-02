@@ -1,6 +1,7 @@
-dist: trust
+dist: trusty
 sudo: required
 language: java
+
 before_install:
  - sudo apt-add-repository ppa:wpilib/toolchain -y
  - sudo apt-get update -q
