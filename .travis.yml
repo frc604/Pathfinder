@@ -7,4 +7,4 @@ before_install:
  - sudo apt-get install frc-toolchain -y
 script:
  - ./gradlew build
- - ls
+ - ls Pathfinder-*
