@@ -5,7 +5,10 @@ language: java
 before_install:
  - sudo apt-add-repository ppa:wpilib/toolchain -y
  - sudo apt-get update -q
+install:
  - sudo apt-get install frc-toolchain -y
+# Skip gradlew assemble since build is a superset
+
 script:
  - ./gradlew build
  - du -sh Pathfinder-*
