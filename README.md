@@ -1,4 +1,6 @@
 # Pathfinder
+This is 604's modified version of JacisNonsense's Pathfinder. The original README is below:
+
 Cross-Platform, Multi-Use Motion Profiling and Trajectory Generation.
 
 Pathfinder is a library for generating Motion Profiles, a way to smoothly fit and follow a trajectory based upon 
