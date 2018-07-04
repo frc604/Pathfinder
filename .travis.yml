@@ -14,8 +14,8 @@ script:
  - du -sh Pathfinder-*
  - ls Pathfinder-Core/build
  - ls Pathfinder-Java/build
- - zip -9 -r built Pathfinder-Core/build
- - zip -9 -r built Pathfinder-Java/build
+ - zip -9 -r built_core Pathfinder-Core/build/libs/pathfinder
+ - zip -9 -r built_java Pathfinder-Java/build/libs
  # Taken from docs
 
 before_cache:
