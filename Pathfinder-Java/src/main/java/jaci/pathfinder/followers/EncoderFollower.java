@@ -80,19 +80,19 @@ public class EncoderFollower {
         // Number of Revolutions * Wheel Circumference
         double distance_covered = ((double)(encoder_tick - encoder_offset) / encoder_tick_count)
                 * wheel_circumference;
+        Trajectory.Segment seg = trajectory.get(segment);
         if (segment < trajectory.length()) {
-            Trajectory.Segment seg = trajectory.get(segment);
-            double error = seg.position - distance_covered;
-            double calculated_value =
-                    kp * error +                                    // Proportional
-                    kd * ((error - last_error) / seg.dt) +          // Derivative
-                    (kv * seg.velocity + ka * seg.acceleration);    // V and A Terms
-            last_error = error;
-            heading = seg.heading;
             segment++;
+        }
+        double error = seg.position - distance_covered;
+        double calculated_value =
+                kp * error +                                    // Proportional
+                kd * ((error - last_error) / seg.dt) +          // Derivative
+                (kv * seg.velocity + ka * seg.acceleration);    // V and A Terms
+        last_error = error;
+        heading = seg.heading;
 
-            return calculated_value;
-        } else return 0;
+        return calculated_value;
     }
 
     /**

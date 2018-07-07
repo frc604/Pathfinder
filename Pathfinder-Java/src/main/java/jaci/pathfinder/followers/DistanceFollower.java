@@ -61,19 +61,19 @@ public class DistanceFollower {
      * @return                  The desired output for your motor controller
      */
     public double calculate(double distance_covered) {
+        Trajectory.Segment seg = trajectory.get(segment);
         if (segment < trajectory.length()) {
-            Trajectory.Segment seg = trajectory.get(segment);
-            double error = seg.position - distance_covered;
-            double calculated_value =
-                    kp * error +                                    // Proportional
-                    kd * ((error - last_error) / seg.dt) +          // Derivative
-                    (kv * seg.velocity + ka * seg.acceleration);    // V and A Terms
-            last_error = error;
-            heading = seg.heading;
             segment++;
+        }
+        double error = seg.position - distance_covered;
+        double calculated_value =
+                kp * error +                                    // Proportional
+                kd * ((error - last_error) / seg.dt) +          // Derivative
+                (kv * seg.velocity + ka * seg.acceleration);    // V and A Terms
+        last_error = error;
+        heading = seg.heading;
 
-            return calculated_value;
-        } else return 0;
+        return calculated_value;
     }
 
     /**
