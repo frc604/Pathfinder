@@ -29,7 +29,8 @@ cache:
     - $HOME/.gradle/wrapper/
 
 before_deploy:
- - openssl aes-256-cbc -iv $iv_hex -K $key_hex -in upload_key_encrypted -out upload_key -d 
+ - openssl aes-256-cbc -iv $iv_hex -K $key_hex -in upload_key_encrypted -out upload_key -d
+
 deploy:
   provider: script
   script: true
