@@ -1,3 +1,4 @@
+cd Files
 put built_core.zip
 put built_java.zip
 put COMMIT_BASE
