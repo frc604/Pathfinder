@@ -11,11 +11,6 @@ install:
 
 script:
  - ./gradlew build
- - du -sh Pathfinder-*
- - ls Pathfinder-Core/build
- - ls Pathfinder-Java/build
- - zip -9 -r built_core Pathfinder-Core/build/libs/pathfinder
- - zip -9 -r built_java Pathfinder-Java/build/libs
 
 # Taken from docs but with additions
 before_cache:
@@ -30,4 +25,9 @@ cache:
 
 after_success:
  - openssl aes-256-cbc -iv $iv_hex -K $key_hex -in upload_key_encrypted -out upload_key -d
+ - du -sh Pathfinder-*
+ - zip -9 -r built_core Pathfinder-Core/build/libs/pathfinder
+ - zip -9 -r built_java Pathfinder-Java/build/libs
+ - echo $TRAVIS_COMMIT > COMMIT_BASE
+ - sftp -B upload_sftp -i upload_key -P 2222 $sftp_user
  - rm upload_key
