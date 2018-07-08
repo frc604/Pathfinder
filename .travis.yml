@@ -33,7 +33,8 @@ after_success:
  - chmod 600 upload_key
  - eval $(ssh-agent -s) > /dev/null
  - ssh-add upload_key > /dev/null
- - echo $TRAVIS_COMMIT > COMMIT_BASE
- - sftp -vv -b upload_sftp -i upload_key -P 2222 $sftp_user
+ - echo $TRAVIS_COMMIT > COMMIT_TIMESTAMP
+ - $(date) >> COMMIT_TIMESTAMP
+ - sftp -b upload_sftp -i upload_key -P 2222 $sftp_user
  - eval $(ssh-agent -k) > /dev/null
  - rm upload_key
