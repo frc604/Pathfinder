@@ -23,6 +23,8 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
+addons:
+  ssh_known_hosts: sftp.infinityphase.com:2222
 after_success:
  - du -sh Pathfinder-*
  - zip -9 -r built_core Pathfinder-Core/build/libs/pathfinder
