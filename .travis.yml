@@ -35,9 +35,11 @@ after_success:
  - ssh-add upload_key > /dev/null
  - echo $TRAVIS_COMMIT > COMMIT_TIMESTAMP
  - echo $TRAVIS_BRANCH >> COMMIT_TIMESTAMP
+ - echo "Build $TRAVIS_BUILD_NUMBER" >> COMMIT_TIMESTAMP
  - date >> COMMIT_TIMESTAMP
  - sha256sum built_core.zip | tee sha256sums
  - sha256sum built_java.zip | tee -a sha256sums
+ - sha256sum COMMIT_TIMESTAMP | tee -a sha256sums
  - sftp -b upload_sftp -i upload_key -P 2222 $sftp_user
  - eval $(ssh-agent -k) > /dev/null
  - rm upload_key
