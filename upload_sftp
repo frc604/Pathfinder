@@ -1,4 +1,5 @@
 cd Files/Pathfinder
 put built_core.zip
 put built_java.zip
+put sha256sums
 put COMMIT_TIMESTAMP
