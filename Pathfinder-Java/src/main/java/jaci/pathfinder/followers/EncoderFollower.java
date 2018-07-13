@@ -81,9 +81,6 @@ public class EncoderFollower {
         double distance_covered = ((double)(encoder_tick - encoder_offset) / encoder_tick_count)
                 * wheel_circumference;
         Trajectory.Segment seg = trajectory.get(segment);
-        if (segment < trajectory.length()) {
-            segment++;
-        }
         double error = seg.position - distance_covered;
         double calculated_value =
                 kp * error +                                    // Proportional
@@ -92,6 +89,9 @@ public class EncoderFollower {
         last_error = error;
         heading = seg.heading;
 
+        if (segment < (trajectory.length()-1) {
+            segment++;
+        }
         return calculated_value;
     }
 
@@ -113,7 +113,7 @@ public class EncoderFollower {
      * @return whether we have finished tracking this trajectory or not.
      */
     public boolean isFinished() {
-        return segment >= trajectory.length();
+        return segment >= (trajectory.length()-1);
     }
 
 }
