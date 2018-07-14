@@ -39,7 +39,7 @@ public class TankModifier {
 
     /**
      * Get the initial source trajectory
-	 * @return the source trajectory
+     * @return the source trajectory
      */
     public Trajectory getSourceTrajectory() {
         return source;
@@ -47,7 +47,7 @@ public class TankModifier {
 
     /**
      * Get the trajectory for the left side of the drive base
-	 * @return a trajectory for the left side
+     * @return a trajectory for the left side
      */
     public Trajectory getLeftTrajectory() {
         return left;
@@ -55,7 +55,7 @@ public class TankModifier {
 
     /**
      * Get the trajectory for the right side of the drive base
-	 * @return a trajectory for the right side
+     * @return a trajectory for the right side
      */
     public Trajectory getRightTrajectory() {
         return right;
