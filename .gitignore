@@ -42,3 +42,7 @@ out/
 
 # Travis CI deploy key (to avoid accidents)
 upload_key
+# Various local build products
+*.zip
+*.so
+*.jar
