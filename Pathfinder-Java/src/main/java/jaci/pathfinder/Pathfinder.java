@@ -14,8 +14,8 @@ public class Pathfinder {
     /**
      * Convert degrees to radians. This is included here for static imports. In this library, all angle values are
      * given in radians
-	 * @param degrees the degrees input
-	 * @return the input in radians
+     * @param degrees the degrees input
+     * @return the input in radians
      */
     public static double d2r(double degrees) {
         return Math.toRadians(degrees);
@@ -23,8 +23,8 @@ public class Pathfinder {
 
     /**
      * Convert radians to degrees. This is included here for static imports.
-	 * @param radians the radians input
-	 * @return the input in degrees
+     * @param radians the radians input
+     * @return the input in degrees
      */
     public static double r2d(double radians) {
         return Math.toDegrees(radians);

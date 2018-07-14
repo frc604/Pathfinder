@@ -56,7 +56,7 @@ public class SwerveModifier {
 
     /**
      * Get the initial source trajectory
-	 * @return the source trajectory
+     * @return the source trajectory
      */
     public Trajectory getSourceTrajectory() {
         return source;
@@ -64,7 +64,7 @@ public class SwerveModifier {
 
     /**
      * Get the trajectory for the front-left wheel of the drive base
-	 * @return a trajectory for the front left
+     * @return a trajectory for the front left
      */
     public Trajectory getFrontLeftTrajectory() {
         return fl;
@@ -72,7 +72,7 @@ public class SwerveModifier {
 
     /**
      * Get the trajectory for the front-right wheel of the drive base
-	 * @return a trajectory for the front right
+     * @return a trajectory for the front right
      */
     public Trajectory getFrontRightTrajectory() {
         return fr;
@@ -80,7 +80,7 @@ public class SwerveModifier {
 
     /**
      * Get the trajectory for the back-left wheel of the drive base
-	 * @return a trajectory for the back left
+     * @return a trajectory for the back left
      */
     public Trajectory getBackLeftTrajectory() {
         return bl;
@@ -88,7 +88,7 @@ public class SwerveModifier {
 
     /**
      * Get the trajectory for the back-right wheel of the drive base
-	 * @return a trajectory for the back right
+     * @return a trajectory for the back right
      */
     public Trajectory getBackRightTrajectory() {
         return br;
