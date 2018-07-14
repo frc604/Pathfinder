@@ -89,7 +89,7 @@ public class EncoderFollower {
         last_error = error;
         heading = seg.heading;
 
-        if (segment < (trajectory.length()-1) {
+        if (segment < (trajectory.length()-1)) {
             segment++;
         }
         return calculated_value;
