@@ -90,6 +90,13 @@ public class DistanceFollower {
     public Trajectory.Segment getSegment() {
         return trajectory.get(segment);
     }
+    
+    /**
+     * @return the previous segment
+     */
+    public Trajectory.Segment prevSegment() {
+        return trajectory.get(Math.max(0,segment-1));
+    }
 
     /**
      * @return whether we have finished tracking this trajectory or not.
