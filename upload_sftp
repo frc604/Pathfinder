@@ -1,4 +1,6 @@
 cd Files/Pathfinder
+-mkdir $TRAVIS_BRANCH
+cd $TRAVIS_BRANCH
 put built_core.zip
 put built_java.zip
 put sha256sums
