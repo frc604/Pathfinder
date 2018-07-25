@@ -41,6 +41,17 @@ public class Pathfinder {
         return angle_degrees;
     }
 
+	/**
+     * Bound an angle (in radians) to -pi to pi radians.
+	 * @param angle_degrees an input angle in radians
+	 * @return the bounded angle
+     */
+    public static double boundHalfDegrees(double angle_degrees) {
+        while (angle_degrees >= Math.PI) angle_degrees -= (2*Math.PI);
+        while (angle_degrees < -Math.PI) angle_degrees += (2*Math.PI);
+        return angle_degrees;
+    }
+
     /**
      * Generate a motion profile trajectory using the given waypoints and configuration.
      * @param waypoints     An array of waypoints (setpoints) for the trajectory path to intersect
