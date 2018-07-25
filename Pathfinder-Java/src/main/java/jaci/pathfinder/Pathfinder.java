@@ -43,10 +43,10 @@ public class Pathfinder {
 
 	/**
      * Bound an angle (in radians) to -pi to pi radians.
-	 * @param angle_degrees an input angle in radians
+	 * @param angle_radians an input angle in radians
 	 * @return the bounded angle
      */
-    public static double boundHalfRadians(double angle_degrees) {
+    public static double boundHalfRadians(double angle_radians) {
         while (angle_degrees >= Math.PI) angle_degrees -= (2*Math.PI);
         while (angle_degrees < -Math.PI) angle_degrees += (2*Math.PI);
         return angle_degrees;
