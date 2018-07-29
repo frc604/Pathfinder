@@ -1,6 +1,6 @@
 #include "pathfinder.h"
 
-void pathfinder_modify_tank(Segment *original, int length, Segment *left_traj, Segment *right_traj, double wheelbase_width, TrajectoryConfig config) {
+void pathfinder_modify_tank(Segment *original, int length, Segment *left_traj, Segment *right_traj, double wheelbase_width, double max_v) {
     double w = wheelbase_width / 2;
     
     // Used to keep track of added time to path
@@ -33,9 +33,9 @@ void pathfinder_modify_tank(Segment *original, int length, Segment *left_traj, S
             left.velocity = distance / seg.dt;
             
             // Check if velocity is over max
-            if (left.velocity > config.max_v ) {
-                left.dt = (distance / config.max_v) + dt_offset_left;
-                left.velocity = config.max_v;
+            if (left.velocity > max_v ) {
+                left.dt = (distance / max_v) + dt_offset_left;
+                left.velocity = max_v;
                 dt_offset_left += left.dt - seg.dt;
             }
             
@@ -58,9 +58,9 @@ void pathfinder_modify_tank(Segment *original, int length, Segment *left_traj, S
             right.position = last.position + distance;
             right.velocity = distance / seg.dt;
             
-            if (right.velocity > config.max_v ) {
-                right.dt = (distance / config.max_v) + dt_offset_right;
-                right.velocity = config.max_v;
+            if (right.velocity > max_v ) {
+                right.dt = (distance / max_v) + dt_offset_right;
+                right.velocity = max_v;
                 dt_offset_right += right.dt - seg.dt;
             }
             
