@@ -23,11 +23,11 @@ public class PathfinderJNI {
     }
     public static native Trajectory.Segment[] generateTrajectory(Waypoint[] waypoints, Trajectory.FitMethod fit, int samples, double dt, double max_velocity, double max_acceleration, double max_jerk);
 
-    public static Trajectory[] modifyTrajectoryTank(Trajectory traj, double wheelbase_width) {
-        Trajectory.Segment[][] mod = modifyTrajectoryTank(traj.segments, wheelbase_width);
+    public static Trajectory[] modifyTrajectoryTank(Trajectory traj, double wheelbase_width, Trajectory.Config config) {
+        Trajectory.Segment[][] mod = modifyTrajectoryTank(traj.segments, wheelbase_width, config);
         return new Trajectory[] { new Trajectory(mod[0]), new Trajectory(mod[1]) };
     }
-    public static native Trajectory.Segment[][] modifyTrajectoryTank(Trajectory.Segment[] source, double wheelbase_width);
+    public static native Trajectory.Segment[][] modifyTrajectoryTank(Trajectory.Segment[] source, double wheelbase_width, Trajectory.Config config);
 
     public static Trajectory[] modifyTrajectorySwerve(Trajectory traj, double wheelbase_width, double wheelbase_depth, SwerveModifier.Mode mode) {
         Trajectory.Segment[][] mod = modifyTrajectorySwerve(traj.segments, wheelbase_width, wheelbase_depth, mode);

@@ -154,7 +154,9 @@ JNIEXPORT jobjectArray JNICALL Java_jaci_pathfinder_PathfinderJNI_generateTrajec
  *  wheelbase_width:    The width between individual sides of the wheelbase
  */
 JNIEXPORT jobjectArray JNICALL Java_jaci_pathfinder_PathfinderJNI_modifyTrajectoryTank
-  (JNIEnv *env, jclass thisCls, jobjectArray source, jdouble wheelbase_width) {
+  (JNIEnv *env, jclass thisCls, jobjectArray source, jdouble wheelbase_width, jobject config) {
+      
+    double max_v = getDoubleField(env, config, "max_velocity");
     
     int length = (*env)->GetArrayLength(env, source);
     // Segment segs[length];
@@ -182,7 +184,7 @@ JNIEXPORT jobjectArray JNICALL Java_jaci_pathfinder_PathfinderJNI_modifyTrajecto
     Segment *left = malloc(length * sizeof(Segment));
     Segment *right = malloc(length * sizeof(Segment));
     
-    pathfinder_modify_tank(segs, length, left, right, wheelbase_width);
+    pathfinder_modify_tank(segs, length, left, right, wheelbase_width, max_v);
     
     jclass cls = (*env)->FindClass(env, "jaci/pathfinder/Trajectory$Segment");
     jmethodID constructor = (*env)->GetMethodID(env, cls, "<init>", "(DDDDDDDD)V");

@@ -30,8 +30,8 @@ public class TankModifier {
      * @param wheelbase_width   The width (in meters) between the individual sides of the drivebase
      * @return                  self
      */
-    public TankModifier modify(double wheelbase_width) {
-        Trajectory[] trajs = PathfinderJNI.modifyTrajectoryTank(source, wheelbase_width);
+    public TankModifier modify(double wheelbase_width, Trajectory.Config config) {
+        Trajectory[] trajs = PathfinderJNI.modifyTrajectoryTank(source, wheelbase_width, config);
         left = trajs[0];
         right = trajs[1];
         return this;
