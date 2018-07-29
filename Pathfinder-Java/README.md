@@ -46,6 +46,9 @@ for (int i = 0; i < trajectory.length(); i++) {
 ## Modifying your Trajectory
 ### Tank Drive
 ```java
+// Configuration of initial path
+Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, 1.7, 2.0, 60.0);
+
 // The distance between the left and right sides of the wheelbase is 0.6m
 double wheelbase_width = 0.6;
 
@@ -54,7 +57,7 @@ TankModifier modifier = new TankModifier(trajectory);
 
 // Generate the Left and Right trajectories using the original trajectory
 // as the centre
-modifier.modify(wheelbase_width);
+modifier.modify(wheelbase_width, config);
 
 Trajectory left  = modifier.getLeftTrajectory();       // Get the Left Side
 Trajectory right = modifier.getRightTrajectory();      // Get the Right Side

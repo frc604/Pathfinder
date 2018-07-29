@@ -25,7 +25,7 @@ int main() {
     
     double wheelbase_width = 0.6;
 
-    pathfinder_modify_tank(trajectory, length, leftTrajectory, rightTrajectory, wheelbase_width);
+    pathfinder_modify_tank(trajectory, length, leftTrajectory, rightTrajectory, wheelbase_width, 15.0);
 
     // Do something with the trajectories...
     
