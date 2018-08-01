@@ -2,72 +2,67 @@
 
 void pathfinder_modify_tank(Segment *original, int length, Segment *left_traj, Segment *right_traj, double wheelbase_width, double max_v) {
     double w = wheelbase_width / 2;
-    
-    // Used to keep track of added time to path
-    double dt_offset_left = 0;
-    double dt_offset_right = 0;
-    
+
     int i;
     for (i = 0; i < length; i++) {
         Segment seg = original[i];
         Segment left = seg;
         Segment right = seg;
-        
+
         double cos_angle = cos(seg.heading);
         double sin_angle = sin(seg.heading);
-        
+
         left.x = seg.x - (w * sin_angle);
         left.y = seg.y + (w * cos_angle);
-        
-        if (i > 0) {
-            Segment last = left_traj[i - 1];
-            double distance = sqrt(
-                (left.x - last.x) * (left.x - last.x)
-                + (left.y - last.y) * (left.y - last.y)
-            );
-            
-            // We need to offset the rest of the path too
-            left.dt = seg.dt + dt_offset_left;
-            
-            left.position = last.position + distance;
-            left.velocity = distance / seg.dt;
-            
-            // Check if velocity is over max
-            if (left.velocity > max_v ) {
-                left.dt = (distance / max_v) + dt_offset_left;
-                left.velocity = max_v;
-                dt_offset_left += left.dt - seg.dt;
-            }
-            
-            left.acceleration = (left.velocity - last.velocity) / seg.dt;
-            left.jerk = (left.acceleration - last.acceleration) / seg.dt;
-        }
-        
+
         right.x = seg.x + (w * sin_angle);
         right.y = seg.y - (w * cos_angle);
-        
+
         if (i > 0) {
-            Segment last = right_traj[i - 1];
-            double distance = sqrt(
-                (right.x - last.x) * (right.x - last.x)
-                + (right.y - last.y) * (right.y - last.y)
+            Segment last_left = left_traj[i - 1];
+            Segment last_right = right_traj[i - 1];
+
+            double distance_left = sqrt(
+                (left.x - last_left.x) * (left.x - last_left.x)
+                + (left.y - last_left.y) * (left.y - last_left.y)
             );
-            
-            right.dt = seg.dt + dt_offset_right;
-            
-            right.position = last.position + distance;
-            right.velocity = distance / seg.dt;
-            
-            if (right.velocity > max_v ) {
-                right.dt = (distance / max_v) + dt_offset_right;
-                right.velocity = max_v;
-                dt_offset_right += right.dt - seg.dt;
+            double distance_right = sqrt(
+                (right.x - last_right.x) * (right.x - last_right.x)
+                + (right.y - last_right.y) * (right.y - last_right.y)
+            );
+
+            left.dt = seg.dt;
+            right.dt = seg.dt;
+
+            left.position = last_left.position + distance_left;
+            right.position = last_right.position + distance_right;
+
+            // Check if velocity is over max
+            if (left.velocity > max_v ) {
+                left.dt = distance_left / max_v;
             }
-            
-            right.acceleration = (right.velocity - last.velocity) / seg.dt;
-            right.jerk = (right.acceleration - last.acceleration) / seg.dt;
+            if (right.velocity > max_v ) {
+                right.dt = distance_right / max_v;
+            }
+
+            // Apply any dt shifts to both sides
+            double orig_left_dt=left.dt;
+            double orig_right_dt=right.dt;
+
+            left.dt=MAX(orig_left_dt,orig_right_dt);
+            right.dt=MAX(orig_left_dt,orig_right_dt);
+
+            // Recalculate velocities and other parameters according to new dt
+            left.velocity = distance_left / seg.dt;
+            right.velocity = distance_right / seg.dt;
+
+            left.acceleration = (left.velocity - last_left.velocity) / seg.dt;
+            left.jerk = (left.acceleration - last_left.acceleration) / seg.dt;
+
+            right.acceleration = (right.velocity - last_right.velocity) / seg.dt;
+            right.jerk = (right.acceleration - last_right.acceleration) / seg.dt;
         }
-        
+
         left_traj[i] = left;
         right_traj[i] = right;
     }
