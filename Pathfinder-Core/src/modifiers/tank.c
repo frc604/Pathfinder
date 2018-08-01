@@ -36,6 +36,10 @@ void pathfinder_modify_tank(Segment *original, int length, Segment *left_traj, S
 
             left.position = last_left.position + distance_left;
             right.position = last_right.position + distance_right;
+            
+			// Original velocities that may be overwritten later
+			left.velocity = distance_left / seg.dt;
+            right.velocity = distance_right / seg.dt;
 
             // Check if velocity is over max
             if (left.velocity > max_v ) {
@@ -50,6 +54,8 @@ void pathfinder_modify_tank(Segment *original, int length, Segment *left_traj, S
 
             left.dt = dt_shift;
             right.dt = dt_shift;
+
+			printf("Left is %f, right is %f\n",left.dt, right.dt);
 
             // Recalculate velocities and other parameters according to new dt
             left.velocity = distance_left / seg.dt;
