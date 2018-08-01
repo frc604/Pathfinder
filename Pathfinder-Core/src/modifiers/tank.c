@@ -46,11 +46,10 @@ void pathfinder_modify_tank(Segment *original, int length, Segment *left_traj, S
             }
 
             // Apply any dt shifts to both sides
-            double orig_left_dt=left.dt;
-            double orig_right_dt=right.dt;
+            double dt_shift = MAX(left.dt, right.dt);
 
-            left.dt=MAX(orig_left_dt,orig_right_dt);
-            right.dt=MAX(orig_left_dt,orig_right_dt);
+            left.dt = dt_shift;
+            right.dt = dt_shift;
 
             // Recalculate velocities and other parameters according to new dt
             left.velocity = distance_left / seg.dt;
