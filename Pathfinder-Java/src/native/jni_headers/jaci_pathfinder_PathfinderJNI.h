@@ -18,10 +18,10 @@ JNIEXPORT jobjectArray JNICALL Java_jaci_pathfinder_PathfinderJNI_generateTrajec
 /*
  * Class:     jaci_pathfinder_PathfinderJNI
  * Method:    modifyTrajectoryTank
- * Signature: ([Ljaci/pathfinder/Trajectory/Segment;D)[[Ljaci/pathfinder/Trajectory/Segment;
+ * Signature: ([Ljaci/pathfinder/Trajectory/Segment;DLjaci/pathfinder/Trajectory/Config;)[[Ljaci/pathfinder/Trajectory/Segment;
  */
 JNIEXPORT jobjectArray JNICALL Java_jaci_pathfinder_PathfinderJNI_modifyTrajectoryTank
-  (JNIEnv *, jclass, jobjectArray, jdouble);
+  (JNIEnv *, jclass, jobjectArray, jdouble, jobject);
 
 /*
  * Class:     jaci_pathfinder_PathfinderJNI
