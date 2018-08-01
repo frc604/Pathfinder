@@ -48,6 +48,7 @@ void pathfinder_modify_tank(Segment *original, int length, Segment *left_traj, S
             if (right.velocity > max_v ) {
                 right.dt = distance_right / max_v;
             }
+			//printf("Initial vel is %f\n",left.velocity);
 
             // Apply any dt shifts to both sides
             double dt_shift = MAX(left.dt, right.dt);
@@ -55,11 +56,13 @@ void pathfinder_modify_tank(Segment *original, int length, Segment *left_traj, S
             left.dt = dt_shift;
             right.dt = dt_shift;
 
-			printf("Left is %f, right is %f\n",left.dt, right.dt);
+			//printf("Left is %f, right is %f\n",left.dt, right.dt);
 
             // Recalculate velocities and other parameters according to new dt
-            left.velocity = distance_left / seg.dt;
-            right.velocity = distance_right / seg.dt;
+            left.velocity = distance_left / left.dt;
+            right.velocity = distance_right / right.dt;
+
+			//printf("Final velocity is %f\n",left.velocity);
 
             left.acceleration = (left.velocity - last_left.velocity) / seg.dt;
             left.jerk = (left.acceleration - last_left.acceleration) / seg.dt;
@@ -71,4 +74,5 @@ void pathfinder_modify_tank(Segment *original, int length, Segment *left_traj, S
         left_traj[i] = left;
         right_traj[i] = right;
     }
+	puts("------------");
 }
