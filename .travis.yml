@@ -1,9 +1,11 @@
-dist: trusty
-sudo: required
 language: java
-os:
- - linux
- - osx
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: required
+    - os: osx
 
 install:
  - ./travis_install.sh
