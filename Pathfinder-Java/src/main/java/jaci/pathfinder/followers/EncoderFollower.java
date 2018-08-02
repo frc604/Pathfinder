@@ -118,10 +118,10 @@ public class EncoderFollower {
     }
     
     /**
-     *
+     * @return the next segment
      */
     public Trajectory.Segment nextSegment() {
-        return trajectory.get( Math.min( segment+1, trajectory.length() ) );
+        return trajectory.get(Math.min(segment+1, trajectory.length()));
     }
     
     /**
