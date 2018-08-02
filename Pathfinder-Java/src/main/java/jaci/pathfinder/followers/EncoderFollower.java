@@ -118,6 +118,13 @@ public class EncoderFollower {
     }
     
     /**
+     *
+     */
+    public Trajectory.Segment nextSegment() {
+        return trajectory.get( Math.min( segment+1, trajectory.length() ) );
+    }
+    
+    /**
      * @return whether we have finished tracking this trajectory or not.
      */
     public boolean isFinished() {
