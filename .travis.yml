@@ -1,4 +1,5 @@
 language: java
+jdk: openjdk8
 
 matrix:
   include:
@@ -12,7 +13,7 @@ install:
 # Skip gradlew assemble since build is a superset
 
 script:
- - ./gradlew --stacktrace --info build
+ - ./gradlew --stacktrace --debug --scan build
 
 # Taken from docs but with additions
 before_cache:
