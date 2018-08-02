@@ -13,7 +13,7 @@ install:
 # Skip gradlew assemble since build is a superset
 
 script:
- - ./gradlew --stacktrace --debug --scan build
+ - ./gradlew --stacktrace --debug --scan build | grep 'javah'
 
 # Taken from docs but with additions
 before_cache:
