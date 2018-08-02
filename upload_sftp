@@ -1,4 +1,4 @@
-cd Files/Pathfinder
+cd Files/Pathfinder/$TRAVIS_OS_NAME
 -mkdir $TRAVIS_BRANCH
 cd $TRAVIS_BRANCH
 put built_core.zip

@@ -1,12 +1,12 @@
 dist: trusty
 sudo: required
 language: java
+os:
+ - linux
+ - osx
 
-before_install:
- - sudo apt-add-repository ppa:wpilib/toolchain -y
- - sudo apt-get update -q
 install:
- - sudo apt-get install frc-toolchain -y
+ - ./travis_install.sh
 # Skip gradlew assemble since build is a superset
 
 script:
@@ -25,6 +25,7 @@ cache:
 
 addons:
   ssh_known_hosts: sftp.infinityphase.com:2222
+
 after_success:
  - du -sh Pathfinder-*
  - zip -9 -r built_core Pathfinder-Core/build/libs/pathfinder
@@ -37,9 +38,11 @@ after_success:
  - echo "Branch $TRAVIS_BRANCH" >> COMMIT_TIMESTAMP
  - echo "Build $TRAVIS_BUILD_NUMBER" >> COMMIT_TIMESTAMP
  - date >> COMMIT_TIMESTAMP
+ - cat COMMIT_TIMESTAMP
  - sha256sum built_core.zip | tee sha256sums
  - sha256sum built_java.zip | tee -a sha256sums
  - sha256sum COMMIT_TIMESTAMP | tee -a sha256sums
+ - cat sha256sums
  - envsubst < upload_sftp > upload_sftp_subst
  - sftp -v -b upload_sftp_subst -i upload_key -P 2222 $sftp_user
  - eval $(ssh-agent -k) > /dev/null
