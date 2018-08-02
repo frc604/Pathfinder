@@ -12,7 +12,7 @@ install:
 # Skip gradlew assemble since build is a superset
 
 script:
- - ./gradlew build
+ - ./gradlew --stacktrace --info build
 
 # Taken from docs but with additions
 before_cache:
