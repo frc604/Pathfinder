@@ -2,7 +2,8 @@ install:
  - choco install winscp
 
 build_script:
- - gradlew.bat --no-daemon buildi
+ - gradlew.bat --no-daemon build
+ - echo %PATH%
 
 after_build:
  - 7z a built_java.zip Pathfinder-Java/build/libs
