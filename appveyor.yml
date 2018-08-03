@@ -1,0 +1,19 @@
+build_script:
+ - gradlew.bat --no-daemon build
+
+cache:
+ - C:\Users\appveyor\.gradle
+
+skip_commits:
+  message: \[((skip ci)|(ci skip))\] 
+environment:
+ - JAVA_HOME: C:\Program Files\Java\jdk1.8.0
+
+artifacts:
+ - path: built_core.zip
+ - path: built_java.zip
+ - path: sha256sums
+
+before_deploy:
+ - 7z a built_java.zip Pathfinder-Java/build/libs
+ - 7z a built_core.zip Pathfinder-Core/build/libs/pathfinder
