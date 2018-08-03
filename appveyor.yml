@@ -14,7 +14,7 @@ after_build:
  - ps: Remove-Item -Path C:\Users\appveyor\.gradle\caches\*\plugin-resolution\ -Force -Recurse
  - ps: Remove-Item -Path C:\Users\appveyor\.gradle\caches\*\fileHashes\fileHashes.bin
  - ps: Remove-Item -Path C:\Users\appveyor\.gradle\caches\*\fileHashes\fileHashes.lock
- - ps: 'C:\Program Files (x86)\WinSCP\winscp.com' /help
+ - ps: 'C:\Program Files (x86)\WinSCP\winscp.com /help'
 
 cache:
  - C:\Users\appveyor\.gradle\caches
