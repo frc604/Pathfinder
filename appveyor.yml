@@ -3,7 +3,6 @@ install:
 
 build_script:
  - gradlew.bat --no-daemon build
- - echo %PATH%
 
 after_build:
  - 7z a built_java.zip Pathfinder-Java/build/libs
@@ -15,6 +14,7 @@ after_build:
  - ps: Remove-Item -Path C:\Users\appveyor\.gradle\caches\*\plugin-resolution\ -Force -Recurse
  - ps: Remove-Item -Path C:\Users\appveyor\.gradle\caches\*\fileHashes\fileHashes.bin
  - ps: Remove-Item -Path C:\Users\appveyor\.gradle\caches\*\fileHashes\fileHashes.lock
+ - winscp --help
 
 cache:
  - C:\Users\appveyor\.gradle\caches
