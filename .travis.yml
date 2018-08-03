@@ -33,10 +33,6 @@ after_success:
  - du -sh Pathfinder-*
  - zip -9 -r built_core Pathfinder-Core/build/libs/pathfinder
  - zip -9 -r built_java Pathfinder-Java/build/libs
- - openssl aes-256-cbc -iv $iv_hex -K $key_hex -in upload_key_encrypted -out upload_key -d
- - chmod 600 upload_key
- - eval $(ssh-agent -s) > /dev/null
- - ssh-add upload_key > /dev/null
  - echo "Commit SHA $TRAVIS_COMMIT" > COMMIT_TIMESTAMP
  - echo "Branch $TRAVIS_BRANCH" >> COMMIT_TIMESTAMP
  - echo "Build $TRAVIS_BUILD_NUMBER" >> COMMIT_TIMESTAMP
@@ -46,7 +42,4 @@ after_success:
  - shasum -a 256 -p built_java.zip | tee -a sha256sums
  - shasum -a 256 -p COMMIT_TIMESTAMP | tee -a sha256sums
  - cat sha256sums
- - envsubst < upload_sftp > upload_sftp_subst
- - sftp -oStrictHostKeyChecking=accept-new -b upload_sftp_subst -i upload_key -P 2222 $sftp_user
- - eval $(ssh-agent -k) > /dev/null
- - rm upload_key
+ - ./travis_deploy.sh
