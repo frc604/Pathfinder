@@ -47,6 +47,6 @@ after_success:
  - shasum -a 256 -p COMMIT_TIMESTAMP | tee -a sha256sums
  - cat sha256sums
  - envsubst < upload_sftp > upload_sftp_subst
- - sftp -vv -b upload_sftp_subst -i upload_key -P 2222 $sftp_user
+ - sftp -oStrictHostKeyChecking=accept-new -b upload_sftp_subst -i upload_key -P 2222 $sftp_user
  - eval $(ssh-agent -k) > /dev/null
  - rm upload_key
