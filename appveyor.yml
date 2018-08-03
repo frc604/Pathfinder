@@ -11,17 +11,14 @@ after_build:
  - ps: certUtil -hashfile built_java.zip SHA256 > sha256sums
  - ps: certUtil -hashfile built_core.zip SHA256 >> sha256sums
  - type sha256sums
- - del /F C:\Users\appveyor\.gradle\caches\modules-2\modules-2.lock
+ - ps: Remove-Item -Path C:\Users\appveyor\.gradle\caches\modules-2\modules-2.lock
  - ps: Remove-Item -Path C:\Users\appveyor\.gradle\caches\*\plugin-resolution\ -Force -Recurse
-#- rmdir /S /Q C:\Users\appveyor\.gradle\caches\*\plugin-resolution\
  - ps: Remove-Item -Path C:\Users\appveyor\.gradle\caches\*\fileHashes\fileHashes.bin
  - ps: Remove-Item -Path C:\Users\appveyor\.gradle\caches\*\fileHashes\fileHashes.lock
-#- del /F /Q C:\Users\appveyor\.gradle\caches\*\fileHashes\fileHashes.bin
-#- del /F /Q C:\Users\appveyor\.gradle\caches\*\fileHashes\fileHashes.lock
 
 cache:
  - C:\Users\appveyor\.gradle\caches
- - C:\Users\appveyor\.gradle\wrappers
+ - C:\Users\appveyor\.gradle\wrapper
 
 skip_commits:
   message: \[((skip ci)|(ci skip))\] 
