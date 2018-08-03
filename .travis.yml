@@ -34,7 +34,7 @@ after_success:
  - zip -9 -r built_core Pathfinder-Core/build/libs/pathfinder
  - zip -9 -r built_java Pathfinder-Java/build/libs
  - echo "Commit SHA $TRAVIS_COMMIT" > COMMIT_TIMESTAMP
- - echo "Branch $TRAVIS_BRANCH" >> COMMIT_TIMESTAMP
+ - echo "Branch $TRAVIS_BRANCH on $TRAVIS_OS_NAME" >> COMMIT_TIMESTAMP
  - echo "Build $TRAVIS_BUILD_NUMBER" >> COMMIT_TIMESTAMP
  - date >> COMMIT_TIMESTAMP
  - cat COMMIT_TIMESTAMP

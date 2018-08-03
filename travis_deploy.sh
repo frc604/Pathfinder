@@ -3,7 +3,6 @@ chmod 600 upload_key
 eval $(ssh-agent -s) > /dev/null
 ssh-add upload_key > /dev/null
 envsubst < upload_sftp > upload_sftp_subst
-cat upload_sftp_subst
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   export STRICT_CHECK='-oStrictHostKeyChecking=accept-new'
 fi
