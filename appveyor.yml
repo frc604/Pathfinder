@@ -1,0 +1,32 @@
+#install:
+# - choco install winscp
+
+build_script:
+ - gradlew.bat --no-daemon build
+
+after_build:
+ - 7z a built_java.zip Pathfinder-Java/build/libs
+ - 7z a built_core.zip Pathfinder-Core/build/libs/pathfinder
+ - ps: certUtil -hashfile built_java.zip SHA256 > sha256sums
+ - ps: certUtil -hashfile built_core.zip SHA256 >> sha256sums
+ - type sha256sums
+ - ps: Remove-Item -Path C:\Users\appveyor\.gradle\caches\modules-2\modules-2.lock
+ - ps: Remove-Item -Path C:\Users\appveyor\.gradle\caches\*\plugin-resolution\ -Force -Recurse
+ - ps: Remove-Item -Path C:\Users\appveyor\.gradle\caches\*\fileHashes\fileHashes.bin
+ - ps: Remove-Item -Path C:\Users\appveyor\.gradle\caches\*\fileHashes\fileHashes.lock
+# - ps: '& "C:\Program Files (x86)\WinSCP\winscp.com" -help'
+
+cache:
+ - C:\Users\appveyor\.gradle\caches
+ - C:\Users\appveyor\.gradle\wrapper
+
+skip_commits:
+  message: \[((skip ci)|(ci skip))\] 
+environment:
+  JAVA_HOME: C:\Program Files\Java\jdk1.8.0
+
+artifacts:
+ - path: built_core.zip
+ - path: built_java.zip
+ - path: sha256sums
+
