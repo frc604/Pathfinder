@@ -77,12 +77,15 @@ Don't forget to free the `trajectory`!
 Segment leftTrajectory[length];
 Segment rightTrajectory[length];
 
+// The maximum velocity that your robot should run at
+double max_v = 1.7;
+
 // The distance between the left and right sides of the wheelbase is 0.6m
 double wheelbase_width = 0.6;
 
 // Generate the Left and Right trajectories of the wheelbase using the 
 // originally generated trajectory
-pathfinder_modify_tank(trajectory, length, leftTrajectory, rightTrajectory, wheelbase_width);
+pathfinder_modify_tank(trajectory, length, leftTrajectory, rightTrajectory, wheelbase_width, max_v);
 ```
 
 ### Swerve Drive

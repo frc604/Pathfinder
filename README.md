@@ -1,5 +1,11 @@
 # Pathfinder
-This is 604's modified version of JacisNonsense's Pathfinder. The original README is below:
+This is 604's modified version of JacisNonsense's Pathfinder. The major modifications are
+ - PID followers continue calculating after the robot reaches the end
+ - The tank modifier retimes trajectories so that velocity limits are respected
+
+The original README is below:.
+
+---
 
 Cross-Platform, Multi-Use Motion Profiling and Trajectory Generation.
 

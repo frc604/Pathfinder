@@ -16,7 +16,7 @@ public class Tank {
         Trajectory trajectory = Pathfinder.generate(points, config);
 
         // Wheelbase Width = 0.5m
-        TankModifier modifier = new TankModifier(trajectory).modify(0.5);
+        TankModifier modifier = new TankModifier(trajectory).modify(0.5, config);
 
         // Do something with the new Trajectories...
         Trajectory left = modifier.getLeftTrajectory();

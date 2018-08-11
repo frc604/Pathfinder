@@ -3,6 +3,6 @@
 
 #include "pathfinder/lib.h"
 
-CAPI void pathfinder_modify_tank(Segment *original, int length, Segment *left, Segment *right, double wheelbase_width);
+CAPI void pathfinder_modify_tank(Segment *original, int length, Segment *left, Segment *right, double wheelbase_width, double max_v);
 
 #endif

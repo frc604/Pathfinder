@@ -46,3 +46,7 @@ upload_key
 *.zip
 *.so
 *.jar
+
+# Eclipse files
+.classpath
+.project
