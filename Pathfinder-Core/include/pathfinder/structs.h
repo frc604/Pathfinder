@@ -2,6 +2,7 @@
 #define PATHFINDER_STRUCT_H_DEF
 
 #include "pathfinder/lib.h"
+#include <stdbool.h>
 
 CAPI typedef struct {
     double x, y, angle;
@@ -23,6 +24,7 @@ CAPI typedef struct {
 CAPI typedef struct {
     double dt, max_v, max_a, max_j, src_v, src_theta, dest_pos, dest_v, dest_theta;
     int sample_count;
+    bool reverse_drive;
 } TrajectoryConfig;
 
 CAPI typedef struct {

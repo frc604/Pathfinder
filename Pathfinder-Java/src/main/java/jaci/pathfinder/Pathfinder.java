@@ -60,7 +60,11 @@ public class Pathfinder {
      * @return              The generated trajectory (an array of segments)
      */
     public static Trajectory generate(Waypoint[] waypoints, Trajectory.Config config) {
-        return PathfinderJNI.generateTrajectory(waypoints, config);
+        return generate(waypoints, config, false);
+    }
+    
+    public static Trajectory generate(Waypoint[] waypoints, Trajectory.Config config, boolean reverse) {
+        return PathfinderJNI.generateTrajectory(waypoints, config, reverse);
     }
 
     /**
