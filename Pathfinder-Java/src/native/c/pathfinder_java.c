@@ -115,7 +115,7 @@ JNIEXPORT jobjectArray JNICALL Java_jaci_pathfinder_PathfinderJNI_generateTrajec
     
     TrajectoryCandidate cd;
     fitmethod fitm = getFitMethod(env, fit);
-    pathfinder_prepare(points, point_length, fitm, samples, dt, max_velocity, max_acceleration, max_jerk, &cd;
+    pathfinder_prepare(points, point_length, fitm, samples, dt, max_velocity, max_acceleration, max_jerk, &cd);
     
     int len = cd.length;
     // Segment segs[len];
