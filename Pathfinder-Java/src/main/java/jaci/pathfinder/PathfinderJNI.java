@@ -42,4 +42,9 @@ public class PathfinderJNI {
 
     public static native void trajectorySerializeCSV(Trajectory.Segment[] source, String filename);
     public static native Trajectory.Segment[] trajectoryDeserializeCSV(String filename);
+    
+    public static Trajectory reverseTrajectory(Trajectory traj) {
+        return new Trajectory(reverseTrajectory(traj.segments));
+    }
+    public static native Trajectory.Segment[] reverseTrajectory(Trajectory.Segment[] source);
 }

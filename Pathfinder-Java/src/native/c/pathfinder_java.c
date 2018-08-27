@@ -300,6 +300,46 @@ JNIEXPORT jobjectArray JNICALL Java_jaci_pathfinder_PathfinderJNI_modifyTrajecto
     return returnArray;
 }
 
+JNIEXPORT jobjectArray JNICALL Java_jaci_pathfinder_PathfinderJNI_reverseTrajectory
+    (JNIEnv *env, jclass thisCls, jobjectArray source) {
+    
+    int length = (*env)->GetArrayLength(env, source);
+    Segment *segments = malloc(length * sizeof(Segment));
+    Segment *reverse = malloc(length * sizeof(Segment));
+
+    int i;
+    for (i = 0; i < length; i++) {
+        jobject sobj = (jobject) (*env)->GetObjectArrayElement(env, source, i);
+        Segment s = {
+            getDoubleField(env, sobj, "dt"),
+            getDoubleField(env, sobj, "x"),
+            getDoubleField(env, sobj, "y"),
+            getDoubleField(env, sobj, "position"),
+            getDoubleField(env, sobj, "velocity"),
+            getDoubleField(env, sobj, "acceleration"),
+            getDoubleField(env, sobj, "jerk"),
+            getDoubleField(env, sobj, "heading")
+        };
+        segments[i] = s;
+    }
+
+    pathfinder_modify_reverse(segments, length, reverse);
+    
+    jclass cls = (*env)->FindClass(env, "jaci/pathfinder/Trajectory$Segment");
+    jmethodID constructor = (*env)->GetMethodID(env, cls, "<init>", "(DDDDDDDD)V");
+    
+    jobjectArray result = (*env)->NewObjectArray(env, length, cls, NULL);
+    
+    for (i = 0; i < length; i++) {
+        Segment s = reverse[i];
+        jobject obj = (*env)->NewObject(env, cls, constructor, s.dt, s.x, s.y, s.position,
+            s.velocity, s.acceleration, s.jerk, s.heading);
+        (*env)->SetObjectArrayElement(env, result, i, obj);
+    }
+    
+    return result;
+}
+
 /*
  * Class:     jaci_pathfinder_PathfinderJNI
  * Method:    trajectorySerialize

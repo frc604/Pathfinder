@@ -66,6 +66,10 @@ public class Pathfinder {
     public static Trajectory generate(Waypoint[] waypoints, Trajectory.Config config, boolean reverse) {
         return PathfinderJNI.generateTrajectory(waypoints, config, reverse);
     }
+    
+    public static Trajectory reverseTrajectory(Trajectory traj) {
+        return PathfinderJNI.reverseTrajectory(traj);
+    }
 
     /**
      * Write the Trajectory to a Binary (non human readable) file

@@ -63,6 +63,14 @@ JNIEXPORT void JNICALL Java_jaci_pathfinder_PathfinderJNI_trajectorySerializeCSV
 JNIEXPORT jobjectArray JNICALL Java_jaci_pathfinder_PathfinderJNI_trajectoryDeserializeCSV
   (JNIEnv *, jclass, jstring);
 
+/*
+ * Class:     jaci_pathfinder_PathfinderJNI
+ * Method:    reverseTrajectory
+ * Signature: ([Ljaci/pathfinder/Trajectory/Segment;)[Ljaci/pathfinder/Trajectory/Segment;
+ */
+JNIEXPORT jobjectArray JNICALL Java_jaci_pathfinder_PathfinderJNI_reverseTrajectory
+  (JNIEnv *, jclass, jobjectArray);
+
 #ifdef __cplusplus
 }
 #endif
