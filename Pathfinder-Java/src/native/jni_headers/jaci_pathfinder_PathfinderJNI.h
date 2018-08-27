@@ -10,10 +10,10 @@ extern "C" {
 /*
  * Class:     jaci_pathfinder_PathfinderJNI
  * Method:    generateTrajectory
- * Signature: ([Ljaci/pathfinder/Waypoint;Ljaci/pathfinder/Trajectory/FitMethod;IDDDDZ)[Ljaci/pathfinder/Trajectory/Segment;
+ * Signature: ([Ljaci/pathfinder/Waypoint;Ljaci/pathfinder/Trajectory/FitMethod;IDDDD)[Ljaci/pathfinder/Trajectory/Segment;
  */
 JNIEXPORT jobjectArray JNICALL Java_jaci_pathfinder_PathfinderJNI_generateTrajectory
-  (JNIEnv *, jclass, jobjectArray, jobject, jint, jdouble, jdouble, jdouble, jdouble, jboolean);
+  (JNIEnv *, jclass, jobjectArray, jobject, jint, jdouble, jdouble, jdouble, jdouble);
 
 /*
  * Class:     jaci_pathfinder_PathfinderJNI
