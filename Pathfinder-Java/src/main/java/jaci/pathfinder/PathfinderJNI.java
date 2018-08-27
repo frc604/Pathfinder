@@ -18,12 +18,12 @@ public class PathfinderJNI {
         }
     }
 
-    public static Trajectory generateTrajectory(Waypoint[] waypoints, Trajectory.Config c, boolean reverse_drive) {
-        return new Trajectory(generateTrajectory(waypoints, c.fit, c.sample_count, c.dt, c.max_velocity, c.max_acceleration, c.max_jerk, reverse_drive));
+    public static Trajectory generateTrajectory(Waypoint[] waypoints, Trajectory.Config c) {
+        return new Trajectory(generateTrajectory(waypoints, c.fit, c.sample_count, c.dt, c.max_velocity, c.max_acceleration, c.max_jerk));
     }
     public static native Trajectory.Segment[] generateTrajectory(Waypoint[] waypoints, 
         Trajectory.FitMethod fit, int samples, double dt, double max_velocity, double max_acceleration,
-        double max_jerk, boolean reverse_drive);
+        double max_jerk);
 
     public static Trajectory[] modifyTrajectoryTank(Trajectory traj, double wheelbase_width, Trajectory.Config config) {
         Trajectory.Segment[][] mod = modifyTrajectoryTank(traj.segments, wheelbase_width, config);

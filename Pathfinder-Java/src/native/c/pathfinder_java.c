@@ -94,10 +94,10 @@ jint throwGenerationException(JNIEnv *env) {
  * PARAMS:
  *  waypoints: Array of Waypoints to generate with
  *  config:    Configuration for Trajectory Generation
- *      - fit, samples, dt, max_velocity, max_acceleration, max_jerk, reverseDrive
+ *      - fit, samples, dt, max_velocity, max_acceleration, max_jerk
  */
 JNIEXPORT jobjectArray JNICALL Java_jaci_pathfinder_PathfinderJNI_generateTrajectory
-    (JNIEnv *env, jclass thisCls, jobjectArray waypoints, jobject fit, jint samples, jdouble dt, jdouble max_velocity, jdouble max_acceleration, jdouble max_jerk, jboolean reverse_drive) {
+    (JNIEnv *env, jclass thisCls, jobjectArray waypoints, jobject fit, jint samples, jdouble dt, jdouble max_velocity, jdouble max_acceleration, jdouble max_jerk) {
     
     int point_length = (*env)->GetArrayLength(env, waypoints);
     int i;
@@ -115,7 +115,7 @@ JNIEXPORT jobjectArray JNICALL Java_jaci_pathfinder_PathfinderJNI_generateTrajec
     
     TrajectoryCandidate cd;
     fitmethod fitm = getFitMethod(env, fit);
-    pathfinder_prepare(points, point_length, fitm, samples, dt, max_velocity, max_acceleration, max_jerk, &cd, (bool) reverse_drive);
+    pathfinder_prepare(points, point_length, fitm, samples, dt, max_velocity, max_acceleration, max_jerk, &cd;
     
     int len = cd.length;
     // Segment segs[len];

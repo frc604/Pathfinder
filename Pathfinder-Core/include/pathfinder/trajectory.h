@@ -7,10 +7,10 @@
         double max_velocity, double max_acceleration, double max_jerk, TrajectoryCandidate *cand);*/
         
 /*CAPI*/ int pathfinder_prepare(const Waypoint *path, int path_length, void (*fit)(Waypoint,Waypoint,Spline*), int sample_count, double dt,
-                double max_velocity, double max_acceleration, double max_jerk, TrajectoryCandidate *cand, bool reverse_drive);
+                double max_velocity, double max_acceleration, double max_jerk, TrajectoryCandidate *cand);
         
 CAPI int pathfinder_prepare_LabVIEW(const Waypoint *path, int path_length, int sample_count, double dt,
-        double max_velocity, double max_acceleration, double max_jerk, bool reverse_drive);
+        double max_velocity, double max_acceleration, double max_jerk);
         
 CAPI int pathfinder_generate_LabVIEW(Segment *segments);
 

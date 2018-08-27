@@ -5,7 +5,7 @@
 TrajectoryCandidate cand_LV;
 
 int pathfinder_prepare(const Waypoint *path, int path_length, void (*fit)(Waypoint,Waypoint,Spline*), int sample_count, double dt,
-                double max_velocity, double max_acceleration, double max_jerk, TrajectoryCandidate *cand, bool reverse_drive) {
+                double max_velocity, double max_acceleration, double max_jerk, TrajectoryCandidate *cand) {
     if (path_length < 2) return -1;
     
     cand->saptr = (Spline *)malloc((path_length - 1) * sizeof(Spline));
@@ -23,7 +23,7 @@ int pathfinder_prepare(const Waypoint *path, int path_length, void (*fit)(Waypoi
     }
     
     TrajectoryConfig config = {dt, max_velocity, max_acceleration, max_jerk, 0, path[0].angle,
-        totalLength, 0, path[0].angle, sample_count, reverse_drive};
+        totalLength, 0, path[0].angle, sample_count};
     TrajectoryInfo info = pf_trajectory_prepare(config);
     int trajectory_length = info.length;
     
@@ -49,9 +49,9 @@ int pathfinder_prepare(const Waypoint *path, int path_length, void (*fit)(Waypoi
 *   an allow LabVIEW to create the segments array.
 *********************************************************************************************/
 int pathfinder_prepare_LabVIEW(const Waypoint *path, int path_length, int sample_count, double dt,
-        double max_velocity, double max_acceleration, double max_jerk, bool reverse_drive)
+        double max_velocity, double max_acceleration, double max_jerk)
 {
-    return pathfinder_prepare(path,path_length,FIT_HERMITE_CUBIC,sample_count,dt,max_velocity,max_acceleration,max_jerk,&cand_LV,reverse_drive);
+    return pathfinder_prepare(path,path_length,FIT_HERMITE_CUBIC,sample_count,dt,max_velocity,max_acceleration,max_jerk,&cand_LV);
 }
 
 int pathfinder_generate_LabVIEW(Segment *segments)
@@ -100,15 +100,6 @@ int pathfinder_generate(TrajectoryCandidate *c, Segment *segments) {
                 segments[i].y = coords.y;
                 found = 1;
             }
-        }
-    }
-    
-    if( c->config.reverse_drive ) {
-        for( i = 0; i < trajectory_length; ++i ) {
-            segments[i].position *= -1;
-            segments[i].velocity *= -1;
-            segments[i].acceleration *= -1;
-            segments[i].jerk *= -1;
         }
     }
     
