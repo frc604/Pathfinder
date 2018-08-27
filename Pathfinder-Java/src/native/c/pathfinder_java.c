@@ -300,6 +300,11 @@ JNIEXPORT jobjectArray JNICALL Java_jaci_pathfinder_PathfinderJNI_modifyTrajecto
     return returnArray;
 }
 
+/*
+ * Class:     jaci_pathfinder_PathfinderJNI
+ * Method:    reverseTrajectory
+ * Signature: ([Ljaci/pathfinder/Trajectory/Segment;)[Ljaci/pathfinder/Trajectory/Segment;
+ */
 JNIEXPORT jobjectArray JNICALL Java_jaci_pathfinder_PathfinderJNI_reverseTrajectory
     (JNIEnv *env, jclass thisCls, jobjectArray source) {
     
