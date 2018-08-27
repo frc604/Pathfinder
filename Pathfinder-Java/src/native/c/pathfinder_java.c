@@ -336,6 +336,9 @@ JNIEXPORT jobjectArray JNICALL Java_jaci_pathfinder_PathfinderJNI_reverseTraject
             s.velocity, s.acceleration, s.jerk, s.heading);
         (*env)->SetObjectArrayElement(env, result, i, obj);
     }
+
+	free(segments);
+	free(reverse);
     
     return result;
 }
