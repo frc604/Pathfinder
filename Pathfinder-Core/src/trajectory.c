@@ -52,9 +52,9 @@ int pf_trajectory_create(TrajectoryInfo info, TrajectoryConfig c, Segment *seg) 
     for (i = 0; i < info.length; i++) {
         seg[i].heading = c.src_theta + d_theta * (seg[i].position) / (seg[info.length - 1].position);
         
-        if( c.reverse_drive ) {
+        /* if( c.reverse_drive ) {
             seg[i].position *= -1; // Swap the direction of the path
-        }
+        } */
     }
     return 0;
 }

@@ -82,7 +82,7 @@ int pathfinder_generate(TrajectoryCandidate *c, Segment *segments) {
             double pos_relative = pos - spline_pos_initial;
             if (pos_relative <= splineLengths[spline_i]) {
                 Spline si = splines[spline_i];
-                double percentage = pf_spline_progress_for_distance(si, pos_relative, c->config.sample_count);
+                double percentage = pf_spline_progress_for_distance(si, fabs(pos_relative), c->config.sample_count);
                 Coord coords = pf_spline_coords(si, percentage);
                 segments[i].heading = pf_spline_angle(si, percentage);
                 segments[i].x = coords.x;
