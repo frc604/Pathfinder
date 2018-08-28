@@ -14,7 +14,7 @@ int main() {
     
     TrajectoryCandidate candidate;
     pathfinder_prepare(points, POINT_LENGTH, FIT_HERMITE_CUBIC, PATHFINDER_SAMPLES_HIGH, 0.001, 15.0, 10.0, 60.0, &candidate);
-	free(points);
+    free(points);
 
     int length = candidate.length;
     Segment *trajectory = malloc(length * sizeof(Segment));
@@ -31,7 +31,7 @@ int main() {
     // Do something with the trajectories...
     
     free(trajectory);
-	free(leftTrajectory);
-	free(rightTrajectory);
+    free(leftTrajectory);
+    free(rightTrajectory);
     return 0;
 }
