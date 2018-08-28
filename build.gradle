@@ -1,12 +1,13 @@
 plugins {
-    id "jaci.openrio.gradle.GradleRIO" version "2018.01.07" apply false
-    id "jaci.gradle.EmbeddedTools" version "2018.01.06b" apply false
+    id "jaci.openrio.gradle.GradleRIO" version "2018.03.06" apply false
+    id "jaci.gradle.EmbeddedTools" version "2018.02.04" apply false
 }
 
 allprojects {
     repositories {
-        mavenCentral()
+        jcenter()
     }
+
     apply plugin: 'idea'
 
     version = '1.8'
@@ -35,8 +36,4 @@ subprojects {
             }
         }
     }
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.4'
 }
