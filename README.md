@@ -1,4 +1,5 @@
 # Pathfinder
+### Pathfinder 2 is now under development over at [Grapple Robotics](https://github.com/GrappleRobotics/Pathfinder)
 Cross-Platform, Multi-Use Motion Profiling and Trajectory Generation.
 
 Pathfinder is a library for generating Motion Profiles, a way to smoothly fit and follow a trajectory based upon 
