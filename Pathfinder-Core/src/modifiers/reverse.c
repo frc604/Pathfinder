@@ -16,3 +16,16 @@ void pathfinder_modify_reverse(Segment *original, int length, Segment *dest) {
     }
     // printf("\n");
 }
+
+void pathfinder_modify_reverse_inplace(Segment *original, int length) {
+    int i;
+    for( i = 0; i < length; ++i ) {
+        original[i].position *= -1;
+        original[i].velocity *= -1;
+        original[i].acceleration *= -1;
+        original[i].jerk *= -1;
+        // dest[i].heading = original[i].heading;
+        // dest[i].x = original[i].x;
+        // dest[i].y = original[i].y;;
+    }
+}

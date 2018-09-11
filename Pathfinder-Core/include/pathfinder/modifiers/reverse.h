@@ -4,5 +4,6 @@
 #include "pathfinder/lib.h"
 
 CAPI void pathfinder_modify_reverse(Segment *original, int length, Segment *dest);
+CAPI void pathfinder_modify_reverse_inplace(Segment *original, int length);
 
 #endif
