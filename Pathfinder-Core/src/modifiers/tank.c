@@ -31,14 +31,21 @@ void pathfinder_modify_tank(Segment *original, int length, Segment *left_traj, S
                 + (right.y - last_right.y) * (right.y - last_right.y)
             );
 
+            // Multiply by -1 if source is a backwards trajectory
+            // Use velocity as an indicator of whether trajectory is reversed
+            if (seg.velocity < 0) {
+                distance_left *= -1;
+                distance_right *= -1;
+            }
+
             left.dt = seg.dt;
             right.dt = seg.dt;
 
             left.position = last_left.position + distance_left;
             right.position = last_right.position + distance_right;
-            
-			// Original velocities that may be overwritten later
-			left.velocity = distance_left / seg.dt;
+
+            // Original velocities that may be overwritten later
+            left.velocity = distance_left / seg.dt;
             right.velocity = distance_right / seg.dt;
 
             // Check if velocity is over max
