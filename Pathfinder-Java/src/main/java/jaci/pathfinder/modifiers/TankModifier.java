@@ -8,8 +8,8 @@ import jaci.pathfinder.Trajectory;
  * side of the wheelbase. This is commonly used in robotics for robots which have a drive system similar
  * to a 'tank', where individual parallel sides are driven independently
  *
- * The Source Trajectory is measured from the centre of the drive base. The modification will not modify the central
- * trajectory
+ * The Source Trajectory is measured from the centre of the drive base. If the tank trajectories are retimed, 
+ * the modification will also adjust the dt values along the central trajectory
  *
  * @author Jaci
  */
