@@ -61,6 +61,8 @@ void pathfinder_modify_tank(Segment *original, int length, Segment *left_traj, S
 
             left.dt = dt_shift;
             right.dt = dt_shift;
+            double orig_dt = original[i].dt;
+            original[i].dt = dt_shift;
 
             // Recalculate velocities and other parameters according to new dt
             left.velocity = distance_left / left.dt;
@@ -71,6 +73,15 @@ void pathfinder_modify_tank(Segment *original, int length, Segment *left_traj, S
 
             right.acceleration = (right.velocity - last_right.velocity) / seg.dt;
             right.jerk = (right.acceleration - last_right.acceleration) / seg.dt;
+
+            // old velocity = old dist/old time; new velocity=(old dist/old time)*(old time/new time)
+            original[i].velocity*=orig_dt/dt_shift;
+            // See definition of repeated derivative for repetition
+            original[i].acceleration*=orig_dt/dt_shift;
+            original[i].acceleration*=orig_dt/dt_shift;
+            original[i].jerk*=orig_dt/dt_shift;
+            original[i].jerk*=orig_dt/dt_shift;
+            original[i].jerk*=orig_dt/dt_shift;
         }
 
         left_traj[i] = left;
