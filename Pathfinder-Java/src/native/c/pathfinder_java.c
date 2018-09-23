@@ -199,6 +199,10 @@ JNIEXPORT jobjectArray JNICALL Java_jaci_pathfinder_PathfinderJNI_modifyTrajecto
         jobject jlseg = (*env)->NewObject(env, cls, constructor, l.dt, l.x, l.y, l.position, l.velocity, l.acceleration, l.jerk, l.heading);
         jobject jrseg = (*env)->NewObject(env, cls, constructor, r.dt, r.x, r.y, r.position, r.velocity, r.acceleration, r.jerk, r.heading);
         
+        jobject jseg_orig = (jobject) (*env)->GetObjectArrayElement(env, source, i);
+        jfieldID timeId = (*env)->GetFieldID(env, cls, "dt", "D");
+        (*env)->SetDoubleField(env, jseg_orig, timeId, l.dt); // l.dt should equal r.dt
+        
         (*env)->SetObjectArrayElement(env, leftArray, i, jlseg);
         (*env)->SetObjectArrayElement(env, rightArray, i, jrseg);
     }
