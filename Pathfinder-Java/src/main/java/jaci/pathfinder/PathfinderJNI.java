@@ -7,7 +7,7 @@ public class PathfinderJNI {
 
     static boolean libLoaded = false;
 
-    static {
+    /*static {
         if (!libLoaded) {
             try {
                 System.loadLibrary("pathfinderjava");
@@ -16,7 +16,7 @@ public class PathfinderJNI {
             }
             libLoaded = true;
         }
-    }
+    }*/
 
     public static Trajectory generateTrajectory(Waypoint[] waypoints, Trajectory.Config c) {
         return new Trajectory(generateTrajectory(waypoints, c.fit, c.sample_count, c.dt, c.max_velocity, c.max_acceleration, c.max_jerk));
